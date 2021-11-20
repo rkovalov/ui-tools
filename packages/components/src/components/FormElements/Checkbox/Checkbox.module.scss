@@ -1,0 +1,48 @@
+@import '../../../styles';
+
+.label {
+  display: inline-flex;
+}
+
+.checkbox {
+  height: 18px;
+  width: 18px;
+  border: 1px solid color(gray, 20);
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+
+  &.sm {
+    height: 15px;
+    width: 15px;
+  }
+
+  &.md {
+    height: 18px;
+    width: 18px;
+  }
+
+  &.lg {
+    height: 24px;
+    width: 24px;
+  }
+
+  &.checked {
+    background-color: color(blue, 60);
+    border-color: color(blue, 60);
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    background-color: color(gray, 10);
+  }
+
+  .icon {
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+  }
+}

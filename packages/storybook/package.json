@@ -1,0 +1,44 @@
+{
+  "name": "@ui-tools/storybook",
+  "version": "1.6.2",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "types": "esm/index.d.ts",
+  "license": "UNLICENSED",
+  "target": "app",
+  "sideEffects": false,
+  "private": true,
+  "scripts": {
+    "clean": "rimraf ./dist",
+    "prebuild": "yarn clean",
+    "start:storybook": "start-storybook -p 6006 --no-manager-cache",
+    "build:storybook": "build-storybook -o dist",
+    "serve": "http-server -P http://localhost:3000? -a localhost -p 3000 dist",
+    "prepack": "yarn build",
+    "typecheck": "tsc --noEmit -p ./src/tsconfig.esm.json"
+  },
+  "dependencies": {
+    "react": "17.0.1",
+    "react-dom": "17.0.1"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^6.3.12",
+    "@storybook/addon-essentials": "^6.3.12",
+    "@storybook/addon-links": "^6.3.12",
+    "@storybook/builder-webpack5": "^6.3.12",
+    "@storybook/manager-webpack5": "^6.3.12",
+    "@storybook/react": "^6.3.12",
+    "@storybook/theming": "^6.3.12",
+    "@ui-tools/build-scripts": "^1.11.2",
+    "@ui-tools/components": "^1.25.1",
+    "http-server": "^0.12.3",
+    "mini-css-extract-plugin": "^2.4.5"
+  },
+  "resolutions": {
+    "webpack": "^5.60.0"
+  },
+  "files": [
+    "dist",
+    "bin"
+  ]
+}

@@ -1,0 +1,58 @@
+.inputGroup {
+  .container {
+    display: flex;
+
+    > div:not(:first-child):not(.buttonContainer) {
+      border-left: 1px solid;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-color: inherit;
+    }
+  }
+
+  .input {
+    flex: 2;
+  }
+
+  .select {
+    flex: 1;
+  }
+
+  .item {
+    cursor: default;
+    width: auto;
+    padding: unset;
+
+    .itemContent {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 15px;
+      height: 100%;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    &.left .itemContent {
+      justify-content: flex-start;
+    }
+
+    &.center .itemContent {
+      justify-content: center;
+    }
+
+    &.right .itemContent {
+      justify-content: flex-end;
+    }
+  }
+
+  .buttonContainer {
+    padding: 1px;
+
+    .button {
+      height: 100%;
+    }
+  }
+}

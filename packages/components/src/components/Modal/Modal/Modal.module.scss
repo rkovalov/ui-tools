@@ -1,0 +1,24 @@
+@import '../../../styles';
+
+.overlay {
+  background-color: rgba(color(gray, 10), 0.6);
+  position: fixed;
+  inset: 0;
+  z-index: zIndex(modal);
+}
+
+.modal {
+  @extend %font-regular;
+  font-size: 14px;
+  background-color: #fff;
+  position: relative;
+  margin: 40px auto;
+  width: 620px;
+  max-height: 90vh;
+  background: #fff;
+  overflow: auto;
+  box-shadow: 0 0 10px color(gray, 50);
+  border-radius: 10px;
+  outline: none;
+  z-index: zIndex(modal) + 1;
+}

@@ -1,0 +1,18 @@
+.palette {
+  display: flex;
+  flex-wrap: wrap;
+
+  .colorTitle {
+    font-weight: bold;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+  }
+
+  .colorLine {
+    margin-right: 10px;
+  }
+
+  .colorSwatch {
+    margin-bottom: 10px;
+  }
+}

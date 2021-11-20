@@ -1,0 +1,8 @@
+@import '../../../styles';
+
+.modalTitle {
+  @extend %font-medium;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}

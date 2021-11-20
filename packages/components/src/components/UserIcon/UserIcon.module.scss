@@ -1,0 +1,67 @@
+@import '../../styles';
+
+$size: 24px;
+
+.userIcon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+
+  .content {
+    width: $size - 4px;
+    height: $size - 4px;
+    line-height: 1;
+    color: #fff;
+    font-size: 12px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: color(blue, 60);
+    text-transform: uppercase;
+    border-radius: 50%;
+    z-index: 3;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    background: linear-gradient(to right, #07a6d7, #eb81ae, #df8a2b);
+    transform: rotate(90deg);
+    z-index: 1;
+    top: 0;
+    left: 0;
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: $size - 2px;
+    height: $size - 2px;
+    border-radius: 50%;
+    background: #fff;
+    z-index: 2;
+    padding: 1px;
+  }
+
+  &.disabled {
+    .content {
+      background: color(gray, 20);
+      color: color(black, 60);
+    }
+
+    &::after {
+      background: color(gray, 20);
+    }
+
+    &.selected .content {
+      color: color(black);
+    }
+  }
+}

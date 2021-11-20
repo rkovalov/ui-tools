@@ -1,0 +1,62 @@
+@import '../functions';
+
+$step: 1000;
+$innerStep: 10;
+
+$layers: (
+  main: (
+    base: (),
+    card: (
+      base,
+      tooltip,
+    ),
+    tooltip: (),
+  ),
+  menu: (
+    base,
+    tooltip,
+  ),
+  navigation: (
+    base,
+    tooltip,
+  ),
+  modal: (
+    base,
+    tooltip,
+  ),
+);
+
+@function zIndex($keys...) {
+  $map: $layers;
+  $found-index: 0;
+
+  @each $key in $keys {
+    @if (type-of($map) == 'map') {
+      $found-index: index(map-keys($map), $key) * $step + $found-index * 1;
+      $map: map-get($map, $key);
+    } @else {
+      $found-index: index($map, $key) * $innerStep + $found-index * 1;
+    }
+    @if ($found-index == null) {
+      @error "`#{$key}` is not part of the elevation map: `#{$layers}`";
+    }
+  }
+
+  @return $found-index;
+}
+
+@mixin zIndex($keys...) {
+  $first-el: nth($keys, 1);
+  $valid-positions: relative, absolute, fixed, sticky;
+  @if (index($valid-positions, $first-el)) {
+    position: $first-el;
+    z-index: zIndex(nth-delete($keys, 1)...);
+  } @else {
+    position: relative;
+    z-index: zIndex($keys...);
+  }
+}
+
+/* ===== Usage ===== */
+// @include zIndex(relative, main, tooltip);
+// z-index: zIndex(main, tooltip);

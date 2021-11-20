@@ -1,0 +1,14 @@
+{
+  // used by IDE
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+  },
+  "references": [
+    { "path": "./packages/build-scripts/src/tsconfig.cjs.json" },
+    { "path": "./packages/common/src/tsconfig.cjs.json" },
+    { "path": "./packages/components/src/tsconfig.cjs.json" },
+    { "path": "./packages/storybook/src/tsconfig.cjs.json" },
+    { "path": "./packages/utils/src/tsconfig.cjs.json" }
+  ]
+}

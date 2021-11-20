@@ -1,0 +1,71 @@
+$step: 10;
+$min: 10;
+$max: 90;
+
+$color-list: black gray blue green orange red lightBlue purple amber teal;
+
+$palette: (
+  // primary
+  black:
+    (
+      base: #132c44,
+      90: #2a4056,
+      80: #425669,
+      70: #596a7b,
+      60: #71808e,
+      50: #8895a1,
+      40: #a0aab4,
+      30: #b7bfc6,
+      20: #cfd4d9,
+      10: #e7e9ec,
+    ),
+  gray: (
+    base: #6d849b,
+    5: #f7f9fa,
+  ),
+  blue: (
+    base: #225ebb,
+  ),
+  // secondary
+  green:
+    (
+      base: #41b794,
+    ),
+  orange: (
+    base: #ff8e5c,
+  ),
+  red: (
+    base: #ff3053,
+  ),
+  lightBlue: (
+    base: #4eacf2,
+  ),
+  // additional
+  purple:
+    (
+      base: #6922bb,
+    ),
+  amber: (
+    base: #ffbe5c,
+  ),
+  teal: (
+    base: #41abb7,
+  )
+);
+
+@function color($color, $tone: base) {
+  @if map-has-key($palette, $color) {
+    $color: map-get($palette, $color);
+
+    @if map-has-key($color, $tone) {
+      $tone: map-get($color, $tone);
+      @return $tone;
+    } @else {
+      @return scale-color(map-get($color, base), $lightness: (100 - $tone) * 1%);
+      // @return rgb(map-get($color, base), $tone/100)
+    }
+  }
+
+  @error "unknown color `#{$color}` in palette";
+  @return null;
+}

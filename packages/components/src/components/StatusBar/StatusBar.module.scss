@@ -1,0 +1,148 @@
+@import '../../styles';
+
+$point-width: 9px;
+
+.statusBar {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0;
+  padding: 0 30px 6px;
+
+  .step {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .label {
+    position: relative;
+  }
+
+  .tag {
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .labelContainer {
+    font-size: 14px;
+    display: inline-flex;
+    margin-top: 12px;
+    position: absolute;
+  }
+
+  .labelPlaceholder {
+    // trick for automatically calculate width
+    color: rgba(0, 0, 0, 0);
+    opacity: 0;
+  }
+
+  .point {
+    width: $point-width;
+    height: $point-width;
+    border-radius: 50%;
+    background-color: var(--status-color);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 3px;
+      background-color: #fff;
+      border-radius: 50%;
+    }
+  }
+
+  .status {
+    position: relative;
+    white-space: nowrap;
+    flex: 2;
+
+    &:first-child,
+    &:last-child {
+      flex: 1;
+    }
+
+    &:first-child {
+      .step {
+        align-items: flex-start;
+      }
+
+      .labelContainer {
+        left: calc(-50% + #{$point-width/2});
+      }
+    }
+
+    &:last-child {
+      .step {
+        align-items: flex-end;
+      }
+
+      .labelContainer {
+        right: calc(-50% + #{$point-width/2});
+      }
+    }
+
+    &:before {
+      content: '';
+      height: 3px;
+      background-color: var(--status-color);
+      position: absolute;
+      z-index: 1;
+      width: 100%;
+      left: -50%;
+      top: 4px;
+      transform: translateY(-50%);
+      transition: all 0.25s ease-out;
+    }
+
+    &:first-child:before {
+      display: none;
+    }
+
+    &:last-child:before {
+      width: 200%;
+      right: 0;
+      left: unset;
+    }
+
+    &.active {
+      @extend %font-semi-bold;
+
+      &:before,
+      &:after {
+        background: linear-gradient(to right, #93a3c3, var(--status-color));
+      }
+
+      .point {
+        background-color: var(--status-color);
+
+        &::before {
+          content: none;
+        }
+      }
+
+      .labelContainer {
+        &:after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          opacity: 0.5;
+          display: inline-block;
+          width: 100%;
+          height: 100%;
+          border: 1px solid var(--status-color);
+          border-radius: 71px;
+        }
+      }
+    }
+  }
+}

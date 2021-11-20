@@ -1,0 +1,31 @@
+@import './z-index';
+
+@function concat($keys...) {
+  // @warn 'This is a keys #{$keys}';
+  $result: null;
+  @each $key in $keys {
+    $result: #{if($result, #{$result}#{'-'}, '')}#{$key};
+  }
+  // @warn 'This is a result #{$result}';
+  @return $result;
+}
+
+@mixin exportZindex($map, $rootKeys...) {
+  @each $key, $innerMap in $map {
+    $mergedKeys: append($rootKeys, $key);
+    $rootIndex: index(map-keys($map), $key) * $step;
+    #{concat($mergedKeys...)}: $rootIndex;
+
+    @if (type-of($innerMap) == 'map' and length(map-keys($innerMap)) > 0) {
+      @include exportZindex($innerMap, $mergedKeys...);
+    } @else {
+      @each $key in $innerMap {
+        #{concat(append($mergedKeys, $key)...)}: index($innerMap, $key) * $innerStep + $rootIndex;
+      }
+    }
+  }
+}
+
+:export {
+  @include exportZindex($layers);
+}

@@ -1,0 +1,11 @@
+@import '../assets/fonts/proxima-nova/typography';
+
+%h1 {
+  @extend %font-semi-bold;
+  font-size: 18px;
+}
+
+%h2 {
+  @extend %font-medium;
+  font-size: 16px;
+}

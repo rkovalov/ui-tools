@@ -1,0 +1,12 @@
+{
+  "realm": "Define in env var and set from webpack by copy plugin",
+  "auth-server-url": "Define in env var and set from webpack by copy plugin",
+  "ssl-required": "none",
+  "resource": "client-ui",
+  "clientId": "client-ui",
+  "public-client": true,
+  "verify-token-audience": true,
+  "use-resource-role-mappings": true,
+  "confidential-port": 0,
+  "enable-logging": true
+}

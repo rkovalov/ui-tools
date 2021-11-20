@@ -1,0 +1,75 @@
+@import '../../styles';
+// $color-list
+
+.btn {
+  @extend %font-medium;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  outline-width: thin;
+  color: #fff;
+  cursor: pointer;
+  padding: 0 14px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+  height: 42px;
+
+  @each $current-color in $color-list {
+    &.#{$current-color} {
+      background-color: color($current-color, 70);
+      outline-color: color($current-color, 40);
+
+      &:hover {
+        background-color: color($current-color, 60);
+        box-shadow: 0 4px 10px color($current-color, 20);
+      }
+
+      &:active {
+        box-shadow: none;
+        background-color: color($current-color, 80);
+        outline-color: color($current-color, 100);
+      }
+
+      &.outlined {
+        background-color: #fff;
+        border: 1px solid color(gray, 20);
+        color: color($current-color, 100);
+
+        &:active {
+          border-color: color($current-color, 20);
+        }
+      }
+
+      &.secondary {
+        background-color: color(gray, 10);
+        color: color($current-color, 100);
+
+        &:active {
+          background-color: color($current-color, 10);
+          outline: 1px solid color($current-color, 20);
+        }
+      }
+    }
+  }
+
+  &.md {
+    height: $input-height-md;
+  }
+  &.sm {
+    height: $input-height-sm;
+    font-size: 12px;
+  }
+  &.lg {
+    height: $input-height-lg;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .loader {
+    margin-left: 5px;
+  }
+}

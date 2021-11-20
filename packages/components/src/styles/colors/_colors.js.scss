@@ -1,0 +1,19 @@
+@import './colors';
+
+:export {
+  // return formats
+  // color(${colorName}, ${tone})
+  // color(${colorName})
+  @each $colorName, $colorMap in $palette {
+    @for $i from ceil($min/$step) through ceil($max/$step) {
+      $key: $i * $step;
+      color#{'('}#{"" + $colorName}#{','}#{$key}#{')'}: color($colorName, $key);
+    }
+    @each $toneIndex, $toneValue in $colorMap {
+      $last: if($toneIndex == base, ')', #{','}#{$toneIndex}#{')'} );
+      $key: color#{'('}#{$colorName}#{$last};
+      // $key: color#{'('}#{$colorName}#{','}#{$toneIndex}#{')'};
+      #{$key}: color($colorName, $toneIndex);
+    }
+  }
+}

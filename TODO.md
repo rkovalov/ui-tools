@@ -1,0 +1,4 @@
+- [ ] [scripts]
+  -  [ ] script for initiating templates (app, library) by cli
+- [ ] [storybook]
+  -  [ ] script for initiating templates (app, library) by cli

@@ -1,0 +1,20 @@
+// @import '../../../styles/mixins';
+
+@mixin font-face($font-name, $path, $weight: normal, $style: normal) {
+  @font-face {
+    font-family: $font-name;
+    // font-family: quote($font-name);
+    src: url($path + '.woff2') format('woff2'), url($path + '.woff') format('woff'),
+      url($path + '.otf') format('opentype');
+    font-weight: $weight;
+    font-style: $style;
+    font-display: auto;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@include font-face(neuzeitgro-light, './neuzeitgro-lig', 300);
+@include font-face(neuzeitgro-regular, './neuzeitgro-reg', 400);
+@include font-face(neuzeitgro-bold, './neuzeitgro-bol', 700);
+@include font-face(neuzeitgro-black, './neuzeitgro-bla', 900);

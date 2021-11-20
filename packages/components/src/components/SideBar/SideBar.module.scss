@@ -1,0 +1,61 @@
+@import '../../styles';
+
+$sidebar-width: 280px;
+$sidebar-collapsed-width: 64px;
+
+.asideBar {
+  background-color: #fff;
+  height: 100%;
+  min-height: 100vh;
+  width: $sidebar-width;
+  min-width: $sidebar-width;
+  transition: width, 0.3s;
+  box-shadow: 0 0 6px rgba(95, 139, 205, 0.16);
+  padding: 14px 0;
+  display: flex;
+  flex-direction: column;
+
+  &.collapsed {
+    width: $sidebar-collapsed-width;
+    min-width: $sidebar-collapsed-width;
+  }
+
+  .layout {
+    flex: 1;
+    height: 100%;
+    position: relative;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .toggle {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px 0 18px 0;
+
+    .toggleIcon {
+      cursor: pointer;
+      padding-right: 15px;
+
+      &:hover {
+        svg path {
+          fill: color(gray);
+        }
+      }
+    }
+
+    &.collapsed {
+      justify-content: center;
+
+      .toggleIcon {
+        padding-right: 0;
+      }
+
+      .arrowIcon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}

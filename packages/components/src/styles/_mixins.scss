@@ -1,0 +1,46 @@
+/* ===== Usage ===== */
+// @include font-size(12, 18, 1.2);
+@mixin font-size($font-size, $line-height: normal, $letter-spacing: normal) {
+  font-size: $font-size * 1px;
+  // font-size: $font-size * 0.1rem;
+  // example using rem values and 62.5% font-size so 1rem = 10px
+
+  @if $line-height==normal {
+    line-height: normal;
+  } @else {
+    line-height: $line-height / $font-size;
+  }
+
+  @if $letter-spacing==normal {
+    letter-spacing: normal;
+  } @else {
+    letter-spacing: #{$letter-spacing / $font-size}em;
+  }
+}
+
+/* ===== Usage ===== */
+// @include font-face(Roboto, './fonts/Roboto', normal, normal);
+// URL:s in mixins are resolved relative to mixin declaration
+// https://github.com/bholloway/resolve-url-loader/issues/74
+// thats why we need to copy mixin where it will be used
+@mixin font-face($font-name, $path, $weight: normal, $style: normal) {
+  @font-face {
+    font-family: $font-name;
+    // font-family: quote($font-name);
+    src: url($path + '.woff2') format('woff2'), url($path + '.woff') format('woff'),
+      url($path + '.otf') format('opentype');
+    font-weight: $weight;
+    font-style: $style;
+    font-display: auto;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@mixin ellipsis($max-width) {
+  display: inline-block;
+  max-width: $max-width;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

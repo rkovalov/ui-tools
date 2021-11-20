@@ -1,0 +1,10 @@
+.tabPanel {
+  display: none;
+  background-color: #fff;
+  padding: 28px;
+  border-radius: 0 0 10px 10px;
+
+  &.selected {
+    display: block;
+  }
+}

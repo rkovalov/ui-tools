@@ -1,0 +1,36 @@
+@import '../../../styles';
+
+.link {
+  display: flex;
+  align-items: center;
+  border-radius: inherit;
+  text-decoration: none;
+  height: 100%;
+  width: 100%;
+  color: inherit;
+  padding: 0 12px;
+
+  &:hover {
+    background-color: color(gray, 10);
+    cursor: pointer;
+  }
+
+  &:visited {
+    color: inherit;
+  }
+
+  &.active,
+  &:active {
+    color: color(blue);
+    background-color: color(gray, 10);
+  }
+
+  &.collapsed {
+    padding: 0;
+    justify-content: center;
+  }
+
+  &.withoutHover {
+    background-color: unset;
+  }
+}

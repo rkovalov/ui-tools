@@ -1,0 +1,32 @@
+{
+  "version": "1.6.2",
+  "name": "@ui-tools/common",
+  "private": true,
+  "target": "library",
+  "license": "UNLICENSED",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "peerDependencies": {
+    "react": "^16.13.1 || ^17",
+    "react-dom": "^16.13.1 || ^17"
+  },
+  "dependencies": {
+    "@ui-tools/build-scripts": "^1.11.2",
+    "classnames": "^2.2.6",
+    "react-syntax-highlighter": "^15.4.3"
+  },
+  "devDependencies": {
+    "@storybook/react": "^6.3.12"
+  },
+  "scripts": {
+    "build:styles": "ui-tools-build-scripts build-styles",
+    "build": "yarn build:styles",
+    "test": "ui-tools-build-scripts test --passWithNoTests",
+    "test:watch": "ui-tools-build-scripts test --watchAll",
+    "typecheck": "tsc --noEmit -p ./src/tsconfig.esm.json"
+  },
+  "files": [
+    "dist",
+    "src"
+  ]
+}

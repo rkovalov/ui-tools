@@ -1,0 +1,119 @@
+@import '../../styles';
+
+.toggleFrame {
+  display: inline-block;
+
+  :global {
+    .toggle {
+      position: relative;
+      display: inline-block;
+      box-sizing: border-box;
+      width: calc(var(--height) * 2 - 2px);
+      height: var(--height);
+      line-height: 20px;
+      padding: 0;
+      vertical-align: middle;
+      border-radius: calc(var(--height) / 2 + 2px);
+      border: 1px solid #ccc;
+      background-color: #ccc;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.35, 0, 0.25, 1);
+
+      &-inner {
+        color: #fff;
+        font-size: 12px;
+        position: absolute;
+        left: 24px;
+        top: 0;
+      }
+
+      &:after {
+        position: absolute;
+        width: calc(var(--height) - 4px);
+        height: calc(var(--height) - 4px);
+        left: 1px;
+        top: 1px;
+        border-radius: 50% 50%;
+        background-color: #fff;
+        content: ' ';
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+        transform: scale(1);
+        transition: left 0.3s cubic-bezier(0.35, 0, 0.25, 1);
+        animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
+        animation-duration: 0.3s;
+        animation-name: toggleOff;
+      }
+
+      &:hover:after {
+        transform: scale(1.1);
+        animation-name: toggleOn;
+      }
+      &:focus {
+        box-shadow: 0 0 0 2px #d5f1fd;
+        outline: none;
+      }
+
+      &-checked {
+        border: 1px solid color(blue, 70);
+        background-color: color(blue, 70);
+
+        &:after {
+          left: calc(var(--height) - 1px);
+        }
+      }
+
+      &-checked &-inner {
+        left: 6px;
+      }
+
+      &-disabled {
+        cursor: no-drop;
+        background: #ccc;
+        border-color: #ccc;
+
+        &:after {
+          background: #9e9e9e;
+          animation-name: none;
+          cursor: no-drop;
+        }
+        &:hover:after {
+          transform: scale(1);
+          animation-name: none;
+        }
+      }
+
+      &-label {
+        display: inline-block;
+        line-height: 16px;
+        font-size: 12px;
+        padding-left: 10px;
+        vertical-align: middle;
+        white-space: normal;
+        pointer-events: none;
+        user-select: text;
+      }
+    }
+  }
+}
+
+@keyframes toggleOn {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes toggleOff {
+  0% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

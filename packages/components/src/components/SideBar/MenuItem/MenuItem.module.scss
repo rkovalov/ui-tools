@@ -1,0 +1,52 @@
+@import '../../../styles/';
+
+.menuItem {
+  width: 100%;
+  border-radius: 8px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2px;
+  font-size: 14px;
+
+  .menu {
+    display: flex;
+    padding: 0 12px;
+    width: 100%;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  .icon {
+    display: inline-flex;
+    width: 20px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .label {
+    @include ellipsis(100%);
+    margin-left: 10px;
+    display: inline-block;
+    transition: opacity 0.3s;
+    opacity: 1;
+
+    &.collapsed {
+      margin: 0;
+      opacity: 0;
+      height: 0;
+      width: 0;
+    }
+  }
+
+  &.collapsed {
+    justify-content: center;
+
+    .menu {
+      padding: 0;
+      justify-content: center;
+    }
+  }
+}

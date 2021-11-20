@@ -1,0 +1,101 @@
+{
+  "version": "0.0.0",
+  "name": "ui-tools",
+  "description": "ui packages",
+  "private": true,
+  "author": "Rudolf Kovalyov rudolf.kovalyov@gmail.com",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf ./packages/*/dist",
+    "clean:node_modules": "rimraf ./packages/*/node_modules && rimraf node_modules",
+    "prebuild": "yarn clean",
+    "build:cjs": "tsc --build tsconfig.cjs.json",
+    "build:esm": "tsc --build --diagnostics tsconfig.esm.json",
+    "build:packages": "FORCE_COLOR=1 lerna run build --stream --parallel",
+    "build": "concurrently --raw \"yarn build:cjs\" \"yarn build:esm\" && yarn build:packages",
+    "start": "yarn start:storybook",
+    "start:storybook": "cd packages/storybook && yarn start:storybook",
+    "build:storybook": "yarn build && cd packages/storybook && yarn build:storybook",
+    "lint": "eslint . -f codeframe",
+    "pretest": "yarn typecheck && yarn lint",
+    "test": "FORCE_COLOR=1 lerna run test --stream --parallel",
+    "prettify": "npx prettier \"./**/*.{js,jsx,ts,tsx}\" --write",
+    "postinstall": "is-ci || husky install",
+    "prerelease": "yarn test && yarn build",
+    "release": "yarn lerna publish",
+    "typecheck": "FORCE_COLOR=1 lerna run typecheck --stream --parallel"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=14 <15"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "subject-case": [
+        2,
+        "never",
+        [
+          "start-case",
+          "pascal-case"
+        ]
+      ],
+      "scope-case": [
+        2,
+        "always",
+        [
+          "camel-case",
+          "pascal-case",
+          "kebab-case"
+        ]
+      ]
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.0.1",
+    "@commitlint/config-conventional": "^12.0.1",
+    "@storybook/builder-webpack5": "^6.3.7",
+    "@storybook/manager-webpack5": "^6.3.7",
+    "@types/classnames": "^2.2.11",
+    "react-i18next": "^11.14.2",
+    "i18next": "^21.5.2",
+    "@types/node": "14",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.3",
+    "@typescript-eslint/parser": "^4.28.3",
+    "concurrently": "^6.0.0",
+    "eslint": "^7.31.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-babel": "^5.3.1",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-no-only-tests": "^2.6.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-testing-library": "^4.9.0",
+    "eslint-webpack-plugin": "^2.5.4",
+    "husky": "^5.1.3",
+    "is-ci": "^3.0.0",
+    "lerna": "^3.22.1",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.3.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rimraf": "^3.0.2",
+    "type-fest": "^1.1.3",
+    "typescript": "^4.5.2"
+  }
+}

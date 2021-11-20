@@ -1,0 +1,11 @@
+{
+  "extends": "../../../tsconfig.base.esm.json",
+  "compilerOptions": {
+    "outDir": "../dist/esm",
+    "types": ["jest", "jest-extended", "@testing-library/jest-dom", "jest-chain"],
+    "typeRoots": ["../../../node_modules/@types", "./node_modules/@types", "./typings"],
+  },
+  "references": [
+    // { "path": "../../utils/src/tsconfig.esm.json" }
+  ]
+}

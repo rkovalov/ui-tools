@@ -1,0 +1,82 @@
+@import '../../styles';
+
+.container {
+  @extend %font-regular;
+  line-height: 1.2;
+}
+
+.success {
+  background: color(black, 80);
+  color: #fff;
+}
+
+.confirm {
+  background: color(black, 80);
+  color: #fff;
+
+  .confirmText {
+    display: inline-block;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .content {
+    display: inline-block;
+    margin-right: 10px;
+  }
+}
+
+.error {
+  background: #ff5c79;
+  color: #fff;
+}
+
+.warning {
+  background: #ffab65;
+  color: #fff;
+}
+
+.info {
+  background: #3498db;
+  color: #fff;
+}
+
+.progressBar {
+  background: hsla(0, 0%, 100%, 0.7);
+}
+
+:global {
+  .Toastify__close-button {
+    color: #fff;
+  }
+
+  .Toastify__toast,
+  .Toastify__toast-body {
+    font-family: inherit;
+  }
+
+  .Toastify__toast {
+    border-radius: 6px;
+  }
+
+  .Toastify__toast--success {
+    background: color(black, 80);
+  }
+  .Toastify__toast--warning {
+    background: color(amber);
+  }
+  .Toastify__toast--error {
+    background: color(red, 90);
+  }
+  .Toastify__toast--info {
+    background: color(lightBlue);
+  }
+
+  .Toastify__toast-container--top-right {
+    top: 71px;
+  }
+  .Toastify__toast-container--bottom-right {
+    bottom: 0;
+    right: 10px;
+  }
+}

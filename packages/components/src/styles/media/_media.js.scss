@@ -1,0 +1,7 @@
+@import './media';
+
+:export {
+  @each $point, $pointValue in $breakpoints {
+    #{$point}: $pointValue;
+  }
+}

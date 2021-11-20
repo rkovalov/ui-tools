@@ -1,0 +1,33 @@
+$defaultFont: lato, Helvetica, Arial, Verdana, Tahoma, sans-serif;
+
+%font-thin {
+  font-family: proxima-nova-regular, $defaultFont;
+}
+
+%font-light {
+  font-family: proxima-nova-light, $defaultFont;
+}
+
+%font-regular {
+  font-family: proxima-nova-regular, $defaultFont;
+}
+
+%font-medium {
+  font-family: proxima-nova-medium, $defaultFont;
+}
+
+%font-semi-bold {
+  font-family: proxima-nova-semi-bold, $defaultFont;
+}
+
+%font-bold {
+  font-family: proxima-nova-bold, $defaultFont;
+}
+
+%font-extra-bold {
+  font-family: proxima-nova-extra-bold, $defaultFont;
+}
+
+%font-black {
+  font-family: proxima-nova-black, $defaultFont;
+}

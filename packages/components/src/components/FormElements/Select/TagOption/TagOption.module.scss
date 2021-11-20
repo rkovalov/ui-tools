@@ -1,0 +1,15 @@
+@import '../../../../styles';
+
+.tagOption {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 22px 5px 0;
+}

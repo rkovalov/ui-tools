@@ -1,0 +1,27 @@
+// @import '../../../styles/mixins';
+// URL:s in mixins are resolved relative to mixin declaration
+// https://github.com/bholloway/resolve-url-loader/issues/74
+// TODO: try to move mixin to mixins file with new 4 version of resolve-url-loader
+
+@mixin font-face($font-name, $path, $weight: normal, $style: normal) {
+  @font-face {
+    font-family: $font-name;
+    // font-family: quote($font-name);
+    src: url($path + '.woff2') format('woff2'), url($path + '.woff') format('woff'),
+      url($path + '.otf') format('opentype');
+    font-weight: $weight;
+    font-style: $style;
+    font-display: auto;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@include font-face(proxima-nova-thin, './proxima-nova-thin', 100);
+@include font-face(proxima-nova-light, './proxima-nova-light', 300);
+@include font-face(proxima-nova-regular, './proxima-nova-regular', 400);
+@include font-face(proxima-nova-medium, './proxima-nova-medium', 500);
+@include font-face(proxima-nova-semi-bold, './proxima-nova-semi-bold', 600);
+@include font-face(proxima-nova-bold, './proxima-nova-bold', 700);
+@include font-face(proxima-nova-extra-bold, './proxima-nova-extra-bold', 800);
+@include font-face(proxima-nova-black, './proxima-nova-black', 900);

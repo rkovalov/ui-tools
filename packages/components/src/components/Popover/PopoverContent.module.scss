@@ -1,0 +1,75 @@
+@import '../../styles';
+
+$z-index: zIndex(modal);
+
+.popover {
+  z-index: $z-index;
+  font-family: inherit;
+  background-color: #fff;
+  // border: 1px solid color(gray, 20);
+  border-radius: 4px;
+  // box-shadow: 0 0 10px rgba(#586b9f, 0.16);
+  box-shadow: 0 0 10px rgba(color(black), 0.16);
+}
+
+.popoverContent {
+  @extend %font-medium;
+  position: relative;
+  z-index: $z-index + 2;
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  padding: 10px;
+
+  // overflow: hidden;
+
+  @each $current-color in $color-list {
+    &.#{$current-color} {
+      background-color: color($current-color);
+      color: #fff;
+    }
+  }
+}
+
+.arrow,
+.arrow::before {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  z-index: $z-index + 1;
+}
+
+.arrow::before {
+  content: '';
+  transform: rotate(45deg);
+  background: #fff;
+  // border: 1px solid color(gray, 20);
+  // box-shadow: 0 0 10px rgba(#586b9f, 0.16);
+  box-shadow: 0 0 22px -3px rgba(#586b9f, 0.16);
+}
+
+.arrow {
+  @each $current-color in $color-list {
+    &.#{$current-color}:before {
+      background-color: color($current-color);
+      box-shadow: 0 0 22px -3px rgba(color($current-color), 0.16);
+    }
+  }
+}
+
+.popover[data-popper-placement^='top'] > .arrow {
+  bottom: -4px;
+}
+
+.popover[data-popper-placement^='bottom'] > .arrow {
+  top: -4px;
+}
+
+.popover[data-popper-placement^='left'] > .arrow {
+  right: -4px;
+}
+
+.popover[data-popper-placement^='right'] > .arrow {
+  left: -4px;
+}

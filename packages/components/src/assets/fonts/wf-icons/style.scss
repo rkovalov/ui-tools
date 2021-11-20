@@ -1,0 +1,365 @@
+@import './variables';
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src: url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?yi36rj');
+  src: url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?yi36rj#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?yi36rj') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?yi36rj') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?yi36rj##{$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+i.wf-icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  // speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  // color: #6d849b;
+
+  &:before {
+    color: inherit;
+  }
+}
+
+.wf-icon-card-view {
+  &:before {
+    content: $wf-icon-card-view;
+    color: #6d849b;
+  }
+}
+.wf-icon-transactions {
+  &:before {
+    content: $wf-icon-transactions;
+    color: #6d849b;
+  }
+}
+.wf-icon-payments {
+  &:before {
+    content: $wf-icon-payments;
+    color: #6d849b;
+  }
+}
+
+.wf-icon-settings {
+  &:before {
+    content: $wf-icon-settings;
+  }
+}
+
+.wf-icon-dashboard {
+  &:before {
+    content: $wf-icon-dashboard;
+  }
+}
+.wf-icon-assignment {
+  &:before {
+    content: $wf-icon-assignment;
+  }
+}
+.wf-icon-apps {
+  &:before {
+    content: $wf-icon-apps;
+  }
+}
+.wf-icon-bell {
+  &:before {
+    content: $wf-icon-bell;
+  }
+}
+.wf-icon-arrow-down {
+  &:before {
+    content: $wf-icon-arrow-down;
+  }
+}
+.wf-icon-arrow-up {
+  &:before {
+    content: $wf-icon-arrow-up;
+  }
+}
+.wf-icon-arrow-up-small {
+  &:before {
+    content: $wf-icon-arrow-up-small;
+  }
+}
+.wf-icon-arrow-down-small {
+  &:before {
+    content: $wf-icon-arrow-down-small;
+  }
+}
+.wf-icon-arrow-left {
+  &:before {
+    content: $wf-icon-arrow-left;
+  }
+}
+.wf-icon-arrow-right {
+  &:before {
+    content: $wf-icon-arrow-right;
+  }
+}
+.wf-icon-arrow-left-small {
+  &:before {
+    content: $wf-icon-arrow-left-small;
+  }
+}
+.wf-icon-arrow-right-small {
+  &:before {
+    content: $wf-icon-arrow-right-small;
+  }
+}
+.wf-icon-arrow-start {
+  &:before {
+    content: $wf-icon-arrow-start;
+  }
+}
+.wf-icon-arrow-end {
+  &:before {
+    content: $wf-icon-arrow-end;
+  }
+}
+.wf-icon-bin {
+  &:before {
+    content: $wf-icon-bin;
+  }
+}
+.wf-icon-book {
+  &:before {
+    content: $wf-icon-book;
+  }
+}
+.wf-icon-calendar-empty {
+  &:before {
+    content: $wf-icon-calendar-empty;
+  }
+}
+.wf-icon-calendar {
+  &:before {
+    content: $wf-icon-calendar;
+  }
+}
+.wf-icon-check-circle {
+  &:before {
+    content: $wf-icon-check-circle;
+  }
+}
+.wf-icon-check {
+  &:before {
+    content: $wf-icon-check;
+  }
+}
+.wf-icon-close {
+  &:before {
+    content: $wf-icon-close;
+  }
+}
+.wf-icon-container {
+  &:before {
+    content: $wf-icon-container;
+  }
+}
+.wf-icon-criteria {
+  &:before {
+    content: $wf-icon-criteria;
+  }
+}
+.wf-icon-desktop {
+  &:before {
+    content: $wf-icon-desktop;
+  }
+}
+.wf-icon-laptop {
+  &:before {
+    content: $wf-icon-laptop;
+  }
+}
+.wf-icon-download {
+  &:before {
+    content: $wf-icon-download;
+  }
+}
+.wf-icon-export {
+  &:before {
+    content: $wf-icon-export;
+  }
+}
+.wf-icon-import {
+  &:before {
+    content: $wf-icon-import;
+  }
+}
+.wf-icon-edit {
+  &:before {
+    content: $wf-icon-edit;
+  }
+}
+.wf-icon-filter {
+  &:before {
+    content: $wf-icon-filter;
+  }
+}
+.wf-icon-inspection {
+  &:before {
+    content: $wf-icon-inspection;
+  }
+}
+.wf-icon-link {
+  &:before {
+    content: $wf-icon-link;
+  }
+}
+.wf-icon-list {
+  &:before {
+    content: $wf-icon-list;
+  }
+}
+.wf-icon-risk-profile {
+  &:before {
+    content: $wf-icon-risk-profile;
+  }
+}
+.wf-icon-arrow-down-long {
+  &:before {
+    content: $wf-icon-arrow-down-long;
+  }
+}
+.wf-icon-arrow-up-long {
+  &:before {
+    content: $wf-icon-arrow-up-long;
+  }
+}
+.wf-icon-mobile {
+  &:before {
+    content: $wf-icon-mobile;
+  }
+}
+.wf-icon-dots-horizontal {
+  &:before {
+    content: $wf-icon-dots-horizontal;
+  }
+}
+.wf-icon-dots-vertical {
+  &:before {
+    content: $wf-icon-dots-vertical;
+  }
+}
+.wf-icon-multi {
+  &:before {
+    content: $wf-icon-multi;
+  }
+}
+.wf-icon-offline {
+  &:before {
+    content: $wf-icon-offline;
+  }
+}
+.wf-icon-online {
+  &:before {
+    content: $wf-icon-online;
+  }
+}
+.wf-icon-package {
+  &:before {
+    content: $wf-icon-package;
+  }
+}
+.wf-icon-plus {
+  &:before {
+    content: $wf-icon-plus;
+  }
+}
+.wf-icon-postal {
+  &:before {
+    content: $wf-icon-postal;
+  }
+}
+.wf-icon-upload {
+  &:before {
+    content: $wf-icon-upload;
+  }
+}
+.wf-icon-rail {
+  &:before {
+    content: $wf-icon-rail;
+  }
+}
+.wf-icon-unknown-transport {
+  &:before {
+    content: $wf-icon-unknown-transport;
+  }
+}
+.wf-icon-road {
+  &:before {
+    content: $wf-icon-road;
+  }
+}
+.wf-icon-sea {
+  &:before {
+    content: $wf-icon-sea;
+  }
+}
+.wf-icon-other-transport {
+  &:before {
+    content: $wf-icon-other-transport;
+  }
+}
+.wf-icon-internal-navigation {
+  &:before {
+    content: $wf-icon-internal-navigation;
+  }
+}
+.wf-icon-search {
+  &:before {
+    content: $wf-icon-search;
+  }
+}
+.wf-icon-delivery {
+  &:before {
+    content: $wf-icon-delivery;
+  }
+}
+.wf-icon-air {
+  &:before {
+    content: $wf-icon-air;
+  }
+}
+.wf-icon-shield-check {
+  &:before {
+    content: $wf-icon-shield-check;
+  }
+}
+.wf-icon-shield {
+  &:before {
+    content: $wf-icon-shield;
+  }
+}
+.wf-icon-tablet {
+  &:before {
+    content: $wf-icon-tablet;
+  }
+}
+.wf-icon-sync {
+  &:before {
+    content: $wf-icon-sync;
+  }
+}
+.wf-icon-refresh {
+  &:before {
+    content: $wf-icon-refresh;
+  }
+}
+.wf-icon-unsync {
+  &:before {
+    content: $wf-icon-unsync;
+  }
+}

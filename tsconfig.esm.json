@@ -1,0 +1,10 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./packages/build-scripts/src/tsconfig.esm.json" },
+    { "path": "./packages/common/src/tsconfig.esm.json" },
+    { "path": "./packages/components/src/tsconfig.esm.json" },
+    { "path": "./packages/storybook/src/tsconfig.esm.json" },
+    { "path": "./packages/utils/src/tsconfig.esm.json" }
+  ]
+}

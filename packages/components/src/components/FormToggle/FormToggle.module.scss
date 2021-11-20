@@ -1,0 +1,53 @@
+@import '../../styles';
+
+$padding: 20px;
+
+.formToggleFrame {
+  display: flex;
+  flex-direction: column;
+  color: color(black);
+  border-radius: 6px;
+  background-color: #fff;
+  border: 1px solid color(gray, 20);
+  height: inherit;
+  overflow: hidden;
+  box-sizing: content-box;
+  line-height: 19px;
+
+  p {
+    margin: 0;
+  }
+
+  > div,
+  > p {
+    padding: $padding;
+  }
+
+  > div,
+  > p:not(:last-child) {
+    padding-bottom: 0;
+  }
+
+  .formToggleContent {
+    display: flex;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+    @extend %font-medium;
+
+    &.disabled {
+      color: color(gray, 100);
+    }
+  }
+  .formToggleDescription {
+    padding-top: 20px;
+    @extend %font-regular;
+    font-size: 13px;
+    color: color(gray, 100);
+
+    &.disabled {
+      color: color(gray, 70);
+    }
+  }
+}

@@ -1,0 +1,32 @@
+.clipLoader {
+  border-radius: 50%;
+  border: 2px solid;
+  border-bottom-color: transparent;
+  display: inline-block;
+  animation: clip 0.75s 0s infinite linear;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes clip {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(0.8);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes clip {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(0.8);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}

@@ -1,0 +1,64 @@
+@import '../../../styles';
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  list-style: none;
+  padding: 0 24px;
+  cursor: pointer;
+  height: 48px;
+
+  &.selected {
+    background: #fff;
+    color: color(blue);
+    border-radius: 6px 6px 0 0;
+
+    .count {
+      color: color(blue, 50);
+    }
+  }
+
+  &.disabled {
+    color: color(gray);
+    cursor: not-allowed;
+  }
+
+  &:focus {
+    box-shadow: 0 0 5px color(blue, 60);
+    border-color: color(blue, 60);
+    outline: none;
+  }
+
+  &:focus:after {
+    content: '';
+    position: absolute;
+    height: 5px;
+    left: -2px;
+    right: -2px;
+    bottom: -5px;
+    background: #fff;
+  }
+
+  .content {
+    padding: 0 5px;
+    position: relative;
+
+    &.errors:before {
+      position: absolute;
+      content: '';
+      width: 5px;
+      height: 5px;
+      left: -4px;
+      top: 5px;
+      border-radius: 50%;
+      background-color: color(red, 80);
+    }
+  }
+
+  .count {
+    color: color(black, 50);
+    margin-left: 3px;
+  }
+}

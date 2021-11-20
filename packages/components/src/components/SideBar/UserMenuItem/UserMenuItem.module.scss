@@ -1,0 +1,32 @@
+@import '../../../styles';
+
+.userMenuItem {
+  display: flex;
+
+  .details {
+    flex: 1;
+    margin-left: 10px;
+    width: calc(100% - 30px);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .label {
+    @include ellipsis(100%);
+    display: inline-block;
+    transition: opacity 0.3s;
+    opacity: 1;
+
+    &.collapsed {
+      margin: 0;
+      opacity: 0;
+      height: 0;
+      width: 0;
+    }
+  }
+
+  .status {
+    font-size: 8px;
+    color: color(gray, 90);
+  }
+}

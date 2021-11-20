@@ -1,0 +1,6 @@
+@import '~@ui-tools/components/dist/styles';
+
+.title {
+  font-style: italic;
+  @extend %font-medium;
+}

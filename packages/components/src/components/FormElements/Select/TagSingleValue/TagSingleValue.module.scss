@@ -1,0 +1,20 @@
+@import '../../../../styles';
+
+.tagSingleValue {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  // padding-right for space before arrow of select
+  padding-right: 10px;
+}
+
+.label {
+  @include ellipsis(100%);
+}

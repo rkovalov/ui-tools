@@ -1,0 +1,36 @@
+{
+  "version": "1.5.2",
+  "name": "@ui-tools/utils",
+  "private": false,
+  "target": "library",
+  "license": "MIT",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p ./src/tsconfig.esm.json",
+    "test": "ui-tools-build-scripts test",
+    "test:watch": "ui-tools-build-scripts test --watchAll"
+  },
+  "peerDependencies": {
+    "i18next": "^21",
+    "react-i18next": "^11"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "just-camel-case": "^4.0.2",
+    "just-snake-case": "^1.2.1",
+    "object-hash": "^2.1.1"
+  },
+  "devDependencies": {
+    "@storybook/react": "^6.3.12",
+    "@types/axios": "^0.14.0",
+    "@types/object-hash": "^2.2.1",
+    "@types/node": "^14",
+    "@ui-tools/build-scripts": "^1.11.2",
+    "@ui-tools/common": "^1.6.2"
+  },
+  "files": [
+    "dist",
+    "src"
+  ]
+}

@@ -1,0 +1,21 @@
+<svg xmlns:x="http://ns.adobe.com/Extensibility/1.0/" xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/" xmlns:graph="http://ns.adobe.com/Graphs/1.0/" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Countryflags.com" x="0px" y="0px" viewBox="94.5 694 300 225" enable-background="new 94.5 694 300 225" xml:space="preserve">
+<metadata>
+	<sfw xmlns="http://ns.adobe.com/SaveForWeb/1.0/">
+		<slices/>
+		<sliceSourceBounds width="300" height="225" x="0" y="-222.5" bottomLeftOrigin="true"/>
+	</sfw>
+</metadata>
+<switch>
+	<foreignObject requiredExtensions="http://ns.adobe.com/AdobeIllustrator/10.0/" x="0" y="0" width="1" height="1">
+		<i:pgfRef xlink:href="#adobe_illustrator_pgf">
+		</i:pgfRef>
+	</foreignObject>
+	<g i:extraneous="self">
+		<g>
+			<rect id="_x33_" x="94.5" y="694" fill="#007FFF" width="300" height="225"/>
+			<path id="_x32_" fill="#F7D618" d="M108,739h31.5l9.75-31.5L159,739h31.5L165,758.5l9.75,31.5l-25.5-19.5l-25.5,19.5l9.75-31.5     L108,739z M375.75,694L94.5,862.75V919l0,0h18.75L394.5,750.25V694H375.75"/>
+			<path id="_x31_" fill="#CE1021" d="M394.5,694l-300,180v45l0,0l0,0l300-180V694"/>
+		</g>
+	</g>
+</switch>
+</svg>
