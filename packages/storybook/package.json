@@ -12,7 +12,7 @@
     "clean": "rimraf ./dist",
     "prebuild": "yarn clean",
     "start:storybook": "start-storybook -p 6006 --no-manager-cache",
-    "build:storybook": "build-storybook -o dist",
+    "build:storybook": "build-storybook -o ../../docs",
     "serve": "http-server -P http://localhost:3000? -a localhost -p 3000 dist",
     "prepack": "yarn build",
     "typecheck": "tsc --noEmit -p ./src/tsconfig.esm.json"
