@@ -1,3 +1,4 @@
+import fs from 'fs';
 import Webpack from 'webpack';
 import resolve from 'resolve';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -198,6 +199,11 @@ export default ({ useTypescript = false }) => ({
     // TODO: make public folder
     new CopyPlugin({
       patterns: [
+        fs.existsSync(paths.public) && {
+          from: paths.public,
+          to: './',
+          noErrorOnMissing: true,
+        },
         {
           from: './keycloak.json',
           to: './',
@@ -209,22 +215,7 @@ export default ({ useTypescript = false }) => ({
           },
           noErrorOnMissing: true,
         },
-        {
-          from: './src/robots.txt',
-          to: './',
-          noErrorOnMissing: true,
-        },
-        {
-          from: './src/manifest.json',
-          to: './',
-          noErrorOnMissing: true,
-        },
-        {
-          from: paths.public,
-          to: './',
-          noErrorOnMissing: true,
-        },
-      ],
+      ].filter(Boolean),
     }),
     new HtmlWebpackPlugin({
       template: paths.html,
