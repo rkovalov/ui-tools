@@ -2,7 +2,6 @@ import fs from 'fs';
 import Webpack from 'webpack';
 import resolve from 'resolve';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
@@ -46,7 +45,17 @@ export default ({ useTypescript = false }) => ({
   output: {
     path: paths.dist,
     publicPath: clientEnv.raw.PUBLIC_PATH,
-    filename: 'bundle_[hash:5].js',
+    // filename: IS_PROD ? '[name].[contenthash:8].js' : '[name].bundle.js',
+    // chunkFilename: IS_PROD ? '[name].[contenthash:8].chunk.js' : '[name].chunk.js',
+    // https://github.com/webpack/webpack/issues/9297
+    filename: pathdata =>
+      (pathdata.chunk || {}).chunkReason
+        ? IS_PROD
+          ? '[name].[contenthash:8].chunk.js'
+          : '[name].chunk.js'
+        : IS_PROD
+        ? '[name].[contenthash:8].js'
+        : '[name].bundle.js',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.scss', '.json', useTypescript && '.ts', useTypescript && '.tsx'].filter(Boolean),
@@ -281,10 +290,6 @@ export default ({ useTypescript = false }) => ({
         silent: true,
         // The formatter is invoked directly in WebpackDevServerUtils during development
         formatter: IS_PROD ? typescriptFormatter : undefined,
-      }),
-    IS_PROD &&
-      new MiniCssExtractPlugin({
-        filename: '[name].[contenthash].css',
       }),
   ].filter(Boolean),
 });
