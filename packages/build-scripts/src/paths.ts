@@ -41,6 +41,7 @@ export interface AppPaths extends Paths {
   html: string;
   public: string;
   serviceWorker: string;
+  tsBuildInfoFile: string;
 }
 
 export interface LibraryPaths extends Paths {
@@ -54,7 +55,7 @@ export interface LibraryPaths extends Paths {
 }
 
 const basePaths: Paths = {
-  buildConfig: resolveModule(resolve, 'build'),
+  buildConfig: resolveModule(resolve, 'build.config'),
   dotenv: resolve('.env'),
   packageJson: resolve('package.json'),
   src: resolve('src'),
@@ -71,6 +72,7 @@ const appPaths: AppPaths = {
   html: resolve('src/index.html'),
   public: resolve('src/public'),
   serviceWorker: resolveModule(resolve, `src/service-worker`),
+  tsBuildInfoFile: resolve('node_modules/.cache/tsconfig.tsbuildinfo'),
 };
 
 const libraryPaths: LibraryPaths = {

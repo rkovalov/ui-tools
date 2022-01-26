@@ -1,7 +1,8 @@
 import fs from 'fs';
 import { merge } from 'webpack-merge';
-import WorkboxWebpackPlugin from 'workbox-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
+import WorkboxWebpackPlugin from 'workbox-webpack-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
@@ -23,12 +24,12 @@ export default ({ useTypescript = false, ...config }) =>
         minimizer: [new TerserPlugin({ parallel: true }), new CssMinimizerPlugin()],
       },
       plugins: [
-        // Generate a service worker script that will precache, and keep up to date,
-        // the HTML & assets that are part of the webpack build.
         new MiniCssExtractPlugin({
           filename: '[name].[contenthash:8].css',
           chunkFilename: '[name].[contenthash:8].chunk.css',
         }),
+        // Generate a service worker script that will precache, and keep up to date,
+        // the HTML & assets that are part of the webpack build.
         fs.existsSync(paths.serviceWorker) &&
           new WorkboxWebpackPlugin.InjectManifest({
             swSrc: paths.serviceWorker,

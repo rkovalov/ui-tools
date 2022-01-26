@@ -111,8 +111,8 @@ describe('Provider', () => {
     provider.mock({ statusCode: 500 });
     try {
       await provider();
-    } catch (error) {
-      //@ts-ignore
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       expect(error.statusCode).toBe(500);
     }
   });

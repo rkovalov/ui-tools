@@ -7,6 +7,8 @@ import fs from 'fs';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import { prepareUrls } from 'react-dev-utils/WebpackDevServerUtils';
+//@ts-ignore
+import forkTsCheckerWebpackPlugin from 'react-dev-utils/ForkTsCheckerWebpackPlugin';
 import openBrowser from 'react-dev-utils/openBrowser';
 import { configFactory } from '../../../webpack';
 import paths from '../../../paths';
@@ -21,11 +23,6 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function isCompilerError(err: any): err is { message?: string } {
-  return typeof err === 'object';
-}
-
 function start() {
   const useTypescript = fs.existsSync(paths.tsConfig);
   if (useTypescript) {
@@ -37,7 +34,7 @@ function start() {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const buildConfig = require(paths.buildConfig);
     if (buildConfig.webpack) {
-      console.log(chalk.green('Found custom config in build.js'));
+      console.log(chalk.green(`Found custom config ${paths.buildConfig}`));
       config = buildConfig.webpack(config, { mode: 'development' }) as webpack.Configuration;
     }
   }
@@ -52,20 +49,26 @@ function start() {
   let compiler;
   try {
     compiler = webpack(config);
-  } catch (err) {
-    console.log(chalk.red('Failed to compile.'));
-    if (isCompilerError(err)) {
-      console.log(err.message ?? err);
+    if (useTypescript) {
+      forkTsCheckerWebpackPlugin.getCompilerHooks(compiler).waiting.tap('awaitingTypeScriptCheck', () => {
+        console.log(chalk.yellow('Files successfully emitted, waiting for typecheck results...'));
+      });
     }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
+    console.log(chalk.red('Failed to compile.'));
+    console.log(err.message || err);
+    console.log(err);
     process.exit(1);
   }
 
-  const devServer = new WebpackDevServer(compiler, config.devServer);
+  const devServer = new WebpackDevServer(config.devServer, compiler);
 
   // Launch WebpackDevServer.
   devServer.listen(port, HOST, err => {
     if (err) {
-      console.log(chalk.red(err));
+      console.log(chalk.red(err.message));
+      process.exit(1);
     }
     console.log(chalk.cyan('Starting the development server...\n'));
     openBrowser(urls.localUrlForBrowser);

@@ -1,13 +1,13 @@
 import { merge } from 'webpack-merge';
 import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 
 import paths from '../paths';
 
 import createBaseConfig from './webpack.config.base';
 
-const webpackDevClientEntry = require.resolve('react-dev-utils/webpackHotDevClient');
-const reactRefreshOverlayEntry = require.resolve('react-dev-utils/refreshOverlayInterop');
+const USE_FAST_REFRESH = !process.env.FAST_REFRESH ? true : process.env.FAST_REFRESH === 'true';
 
 export default ({ useTypescript = false, ...config }) => {
   const baseConfig = createBaseConfig({ useTypescript });
@@ -30,14 +30,23 @@ export default ({ useTypescript = false, ...config }) => {
         // },
         // https: true,
         port: 8080,
+        // Enable gzip compression of generated files.
         compress: true,
         // overlay: false,
-        client: { progress: true, overlay: false },
+        client: {
+          overlay: {
+            errors: true,
+            warnings: false,
+          },
+        },
         historyApiFallback: {
           disableDotRule: true,
+          index: baseConfig.output.publicPath,
         },
-        // TODO: make public folder
-        static: [paths.src],
+        static: {
+          directory: paths.public,
+          publicPath: [baseConfig.output.publicPath],
+        },
       },
       plugins: [
         new CircularDependencyPlugin({
@@ -53,17 +62,8 @@ export default ({ useTypescript = false, ...config }) => {
           // set the current working directory for displaying module paths
           cwd: process.cwd(),
         }),
-        new ReactRefreshPlugin({
-          overlay: {
-            entry: webpackDevClientEntry,
-            // The expected exports are slightly different from what the overlay exports,
-            // so an interop is included here to enable feedback on module-level errors.
-            module: reactRefreshOverlayEntry,
-            // Since we ship a custom dev client and overlay integration,
-            // the bundled socket handling logic can be eliminated.
-            sockIntegration: false,
-          },
-        }),
+        USE_FAST_REFRESH && new ReactRefreshPlugin(),
+        new CaseSensitivePathsPlugin(),
       ].filter(Boolean),
     },
     config

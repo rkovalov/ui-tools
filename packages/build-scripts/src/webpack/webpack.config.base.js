@@ -1,12 +1,12 @@
-import fs from 'fs';
 import Webpack from 'webpack';
 import resolve from 'resolve';
+import fs from 'fs';
+import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import ForkTsCheckerWebpackPlugin from 'react-dev-utils/ForkTsCheckerWebpackPlugin';
-import typescriptFormatter from 'react-dev-utils/typescriptFormatter';
 import ReactRefreshTypeScript from 'react-refresh-typescript';
 
 import { merge } from 'webpack-merge';
@@ -20,6 +20,7 @@ import styleLoaders from './styleLoaders';
 
 const IS_DEV = process.env.NODE_ENV === 'development';
 const IS_PROD = process.env.NODE_ENV === 'production';
+const USE_FAST_REFRESH = IS_DEV && (!process.env.FAST_REFRESH ? true : process.env.FAST_REFRESH === 'true');
 
 const getStyleLoaders = styleLoaders({ IS_DEV, IS_PROD });
 const cssRegex = /\.css$/;
@@ -61,20 +62,22 @@ export default ({ useTypescript = false }) => ({
     extensions: ['.js', '.jsx', '.scss', '.json', useTypescript && '.ts', useTypescript && '.tsx'].filter(Boolean),
   },
   module: {
+    strictExportPresence: true,
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|mjs|jsx|ts|tsx|css)$/,
         enforce: 'pre',
         use: ['source-map-loader'],
       },
       useTypescript && {
         test: /\.(js|jsx|ts|tsx)$/,
+        exclude: /node_modules/,
         loader: '@ts-tools/webpack-loader',
         options: {
           cache: IS_DEV,
           cacheDirectoryPath: `${paths.nodeModules}/.cache/${process.env.NODE_ENV}`,
           transformers: {
-            before: IS_DEV ? [ReactRefreshTypeScript()] : [],
+            before: [USE_FAST_REFRESH && ReactRefreshTypeScript()].filter(Boolean),
           },
         },
       },
@@ -85,8 +88,11 @@ export default ({ useTypescript = false }) => ({
           {
             loader: 'babel-loader',
             options: merge(babelConfig, {
+              // It enables caching results in ./node_modules/.cache/babel-loader/
+              // directory for faster rebuilds.
               cacheDirectory: IS_DEV,
-              plugins: [IS_DEV && 'react-refresh/babel'].filter(Boolean),
+              compact: IS_PROD,
+              plugins: [USE_FAST_REFRESH && require.resolve('react-refresh/babel')].filter(Boolean),
             }),
           },
         ].filter(Boolean),
@@ -205,7 +211,6 @@ export default ({ useTypescript = false }) => ({
   plugins: [
     IS_DEV && new ESLintPlugin({ extensions: ['.js', '.jsx', '.ts', '.tsx'] }),
     new Webpack.DefinePlugin(clientEnv.stringified),
-    // TODO: make public folder
     new CopyPlugin({
       patterns: [
         fs.existsSync(paths.public) && {
@@ -214,7 +219,7 @@ export default ({ useTypescript = false }) => ({
           noErrorOnMissing: true,
         },
         {
-          from: './keycloak.json',
+          from: path.join(paths.root, 'keycloak.json'),
           to: './',
           transform(content) {
             return jsonMerge(content, {
@@ -222,6 +227,17 @@ export default ({ useTypescript = false }) => ({
               realm: `${process.env.KEYCLOAK_REALM || process.env.DEFAULT_KEYCLOAK_REALM}`,
             });
           },
+          noErrorOnMissing: true,
+        },
+        // Copies of robots.txt and manifest.json are deprected, should be moved to public folder
+        {
+          from: path.join(paths.src, 'robots.txt'),
+          to: './',
+          noErrorOnMissing: true,
+        },
+        {
+          from: path.join(paths.src, 'manifest.json'),
+          to: './',
           noErrorOnMissing: true,
         },
       ].filter(Boolean),
@@ -268,28 +284,44 @@ export default ({ useTypescript = false }) => ({
     // TypeScript type checking
     useTypescript &&
       new ForkTsCheckerWebpackPlugin({
-        typescript: resolve.sync('typescript', {
-          basedir: paths.nodeModules,
-        }),
         async: IS_DEV,
-        checkSyntacticErrors: true,
-        resolveModuleNameModule: process.versions.pnp ? `${__dirname}/pnpTs.js` : undefined,
-        resolveTypeReferenceDirectiveModule: process.versions.pnp ? `${__dirname}/pnpTs.js` : undefined,
-        tsconfig: paths.tsConfig,
-        reportFiles: [
+        typescript: {
+          typescriptPath: resolve.sync('typescript', {
+            basedir: paths.nodeModules,
+          }),
+          configOverwrite: {
+            compilerOptions: {
+              sourceMap: true,
+              skipLibCheck: true,
+              inlineSourceMap: false,
+              declarationMap: false,
+              noEmit: true,
+              incremental: true,
+              tsBuildInfoFile: paths.tsBuildInfoFile,
+            },
+          },
+          context: paths.appPath,
+          diagnosticOptions: {
+            syntactic: true,
+          },
+          mode: 'write-references',
+        },
+        issue: {
           // This one is specifically to match during CI tests,
           // as micromatch doesn't match
+          // '../template/src/App.tsx'
           // otherwise.
-          '../**/src/**/*.{ts,tsx}',
-          '**/src/**/*.{ts,tsx}',
-          '!**/src/**/__tests__/**',
-          '!**/src/**/?(*.)(spec|specs|test|tests).*',
-          '!**/src/setupProxy.*',
-          '!**/src/setupTests.*',
-        ],
-        silent: true,
-        // The formatter is invoked directly in WebpackDevServerUtils during development
-        formatter: IS_PROD ? typescriptFormatter : undefined,
+          include: [{ file: '../**/src/**/*.{ts,tsx}' }, { file: '**/src/**/*.{ts,tsx}' }],
+          exclude: [
+            { file: '**/src/**/__tests__/**' },
+            { file: '**/src/**/?(*.){spec|test|tests}.*' },
+            { file: '**/src/setupProxy.*' },
+            { file: '**/src/setupTests.*' },
+          ],
+        },
+        logger: {
+          infrastructure: 'silent',
+        },
       }),
   ].filter(Boolean),
 });

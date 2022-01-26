@@ -9,6 +9,7 @@ const { version } = require('../../package.json');
 export const createStoryMeta = (meta: Meta): Meta => {
   return {
     ...meta,
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     title: `components:${version as string}/${meta.title}`,
   };
 };

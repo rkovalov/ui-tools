@@ -22,7 +22,7 @@
     "object-hash": "^2.1.1"
   },
   "devDependencies": {
-    "@storybook/react": "^6.3.12",
+    "@storybook/react": "^6.4.14",
     "@types/axios": "^0.14.0",
     "@types/object-hash": "^2.2.1",
     "@types/node": "^14",

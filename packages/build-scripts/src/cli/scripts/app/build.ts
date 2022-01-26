@@ -19,11 +19,6 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
-type WebpackError = {
-  stack?: string;
-  details?: string;
-};
-
 interface CustomWebpackConfig extends webpack.Configuration {
   buildFor?: string;
 }
@@ -53,9 +48,10 @@ function getCompilers(configs: CustomWebpackConfig[]): Compiler[] {
 
 async function build(): Promise<unknown> {
   console.log(chalk.green('Creating an optimized production build...'));
+
   const useTypescript = fs.existsSync(paths.tsConfig);
   if (useTypescript) {
-    console.log(chalk.green('Found tsconfig.json, will be apply ts-loader instead of babel-loader.'));
+    console.log(chalk.green('Found tsconfig.json, will be applied ts-loader instead of babel-loader.'));
   }
   let config = configFactory({ mode: 'production', useTypescript });
   if (fs.existsSync(paths.buildConfig)) {
@@ -75,12 +71,12 @@ async function build(): Promise<unknown> {
 
     return await new Promise((resolve, reject) => {
       try {
-        compiler.run((err?: WebpackError, stats?: webpack.Stats) => {
+        compiler.run((err, stats) => {
           console.log(chalk.green(`Webpack build for: "${buildFor}"`));
           if (err) {
             console.log(chalk.red(`Webpack build error: ${buildFor}`));
-            if (err.details) {
-              console.log(chalk.red(err.details));
+            if (err.message) {
+              console.log(chalk.red(err.message));
             }
             reject(err.stack ?? err);
           }
